@@ -1,0 +1,26 @@
+{
+  "name": "sudoku",
+  "author": "Dan Cooperstock (Cooperstock Software)",
+  "productName": "Sudoku",
+  "version": "1.0.0",
+  "description": "Sudoku (9x9 and 6x6) - runs in a web browser or as an Electron desktop app",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "node test/run-tests.js",
+    "dist": "electron-builder"
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^25.0.0"
+  },
+  "build": {
+    "appId": "com.example.sudoku",
+    "productName": "Sudoku",
+    "files": ["index.html", "styles.css", "js/**", "main.js", "icon.png", "icon-256.png", "sudoku.pdf", "package.json"],
+    "win": { "target": "portable", "icon": "sudoku.ico" },
+    "mac": { "category": "public.app-category.puzzle-games" },
+    "linux": { "target": "AppImage", "category": "Game" }
+  },
+  "license": "MIT"
+}

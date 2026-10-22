@@ -1,0 +1,150 @@
+/* Sudoku - look and feel follows the Delphi / WinForms version: fixed pixel layout, Tahoma 17px. */
+
+:root {
+  --face: #f0f0f0;                 /* clBtnFace */
+  --selected: #c0dcc0;             /* clMoneyGreen: the highlighted square */
+  --font: Tahoma, "Segoe UI", Verdana, Geneva, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  background: #dcdcdc;
+  font-family: var(--font);
+  overflow: hidden;
+}
+
+body.busy, body.busy .form, body.busy .cell, body.busy .btn { cursor: progress; }
+
+#stage {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* The scaler is sized to the scaled puzzle so it centres properly when the window is small. */
+.scaler { position: relative; box-shadow: 0 2px 14px rgba(0, 0, 0, .35); }
+
+.form {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: 0 0;
+  background: var(--face);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* The black background the squares sit on (Delphi: Shape1); it shows through as the grid lines. */
+.shape { position: absolute; background: #000; }
+
+.cell {
+  position: absolute;
+  width: 65px;
+  height: 65px;
+  cursor: default;
+}
+
+/* Small helper digits: bold means still possible, italic means ruled out. */
+.d {
+  position: absolute;
+  width: 18px;
+  height: 20px;
+  font: bold 17px/18px var(--font);
+  color: #000;
+  cursor: default;
+}
+.d.imp { font-weight: normal; font-style: italic; }
+
+/* The big result digit: bold if part of the original puzzle, regular if solved. */
+.result {
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  width: 52px;
+  height: 54px;
+  font: normal 37px/44px var(--font);
+  text-align: center;
+  color: #000;
+  cursor: default;
+}
+.result.orig { font-weight: bold; }
+
+/* Buttons, in the style of Windows push buttons */
+.btn {
+  position: absolute;
+  padding: 0;
+  font: 16px var(--font);
+  color: #000;
+  background: #e1e1e1;
+  border: 1px solid #adadad;
+  border-radius: 0;
+  cursor: default;
+  white-space: nowrap;
+}
+.btn:hover { background: #e5f1fb; border-color: #0078d7; }
+.btn:active { background: #cce4f7; border-color: #005499; }
+.btn:focus-visible { outline: 1px dotted #000; outline-offset: -4px; }
+.btn.default { border-color: #0078d7; border-width: 2px; }
+u { text-decoration: underline; }
+
+/* ---- Message boxes and the Options dialog ---- */
+
+#overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+#overlay[hidden] { display: none; }
+#overlay, #overlay * { cursor: default; }
+
+.dlg {
+  background: var(--face);
+  border: 1px solid #5a5a5a;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, .5);
+  font: 12px "Segoe UI", Tahoma, sans-serif;
+  color: #000;
+  transform-origin: 0 0;
+}
+.dlg .title {
+  background: #fff;
+  padding: 6px 10px;
+  font-size: 12px;
+  border-bottom: 1px solid #dfdfdf;
+}
+
+/* message box */
+.msgbox { width: 420px; max-width: 94vw; }
+.msgbox .body {
+  background: #fff;
+  padding: 24px 20px 22px;
+  font-size: 15px;
+  line-height: 1.35;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  max-height: 70vh;
+  overflow: auto;
+}
+.msgbox .buttons { padding: 12px 14px; display: flex; justify-content: flex-end; gap: 8px; }
+.msgbox .buttons .btn { position: static; min-width: 84px; height: 28px; font: 14px "Segoe UI", Tahoma, sans-serif; }
+
+/* options dialog: absolute pixel layout from Options.dfm */
+.optform { position: relative; width: 655px; height: 316px; }
+.optform .opt { position: absolute; font: 15px var(--font); white-space: nowrap; display: flex; align-items: center; gap: 5px; }
+.optform .opt input { margin: 0; width: 15px; height: 15px; }
+.optform fieldset {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #dcdcdc;
+}
+.optform legend { font: bold 15px var(--font); padding: 0 3px; margin-left: 6px; }
+.optform fieldset .opt { left: 12px; }
