@@ -203,9 +203,9 @@
       place(group, 12, 114, 619, 114);
       el('legend', '', group).textContent = 'Solving Method to Use';
       const methods = [
-        addOption(group, 'radio', 'method', 'S&imple solving rules, plus prompt to use fast backtracking approach if needed', 12, 22, settings.method === 1),
-        addOption(group, 'radio', 'method', 'Si&mple solving rules, automatically use fast backtracking approach if needed', 12, 49, settings.method === 2),
-        addOption(group, 'radio', 'method', '&Only use fast backtracking approach', 12, 76, settings.method === 3),
+        addOption(group, 'radio', 'method', 'S&imple solving rules, plus prompt to use fast backtracking approach if needed', 12, 5, settings.method === 1),
+        addOption(group, 'radio', 'method', 'Si&mple solving rules, automatically use fast backtracking approach if needed', 12, 32, settings.method === 2),
+        addOption(group, 'radio', 'method', '&Only use fast backtracking approach', 12, 59, settings.method === 3),
       ];
 
       const attempts = addOption(form, 'checkbox', 'attempts', 'In fast backtracking &approach, show digits being tried', 20, 234, settings.showAttempts);
